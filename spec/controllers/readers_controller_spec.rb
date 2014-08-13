@@ -15,4 +15,14 @@ describe ReadersController do
 			expect(response).to render_template :new
 		end
 	end
+
+	describe 'Post create' do
+		it 'should save new reader with valid parameters' do
+			reader = Reader.create!(email: 's@m.com', password: 'pass', password_confirmation: 'pass')
+			
+			expect(reader.reload.email).to eq('s@m.com')
+			expect(response).to have_http_status(200)
+			expect(flash).not_to be_nil
+		end		
+	end
 end
