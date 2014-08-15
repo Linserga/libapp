@@ -15,11 +15,11 @@ Then (/^I should be registered in application$/) do
 end
 
 Then(/^I should be logged in$/) do
-  pending # express the regexp above with the code you wish you had
+	expect(page).to have_content("Welcome")
 end
 
 When(/^I fill the register form with invalid data$/) do
-	visit('/register')
+	visit new_reader_path
 	fill_in 'reader_email', with: 'reader'
 	fill_in 'reader_password', with: 'pass'
 	fill_in 'reader_password_confirmation', with: 'pass'
@@ -31,5 +31,17 @@ Then(/^I should see the register form again$/) do
 end
 
 Then(/^I should not be registered in application$/) do
-	expect(Reader.find_by_email('reaer')).to be_nil
+	expect(Reader.find_by_email('reader')).to be_nil
 end
+
+
+When(/^I go to home page$/) do
+	visit root_path
+end
+
+Then(/^I should see guest menu$/) do
+	expect(page).to have_selector('#top-menu')
+	expect(page).to have_link('Register', href: register_path)
+end
+
+

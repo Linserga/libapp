@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
  resources :readers
 
- root to: 'readers#new'
+ root to: 'home#index'
 end

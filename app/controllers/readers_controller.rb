@@ -8,7 +8,7 @@ class ReadersController < ApplicationController
 		@reader = Reader.new(reader_params)
 
 		if @reader.save
-			flash[:success] = 'Reader was created'
+			flash[:success] = 'Welcome. Reader was created'
 			redirect_to root_path
 		else
 			flash.now[:error] = 'There occured a problem. Try again'
