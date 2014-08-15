@@ -11,7 +11,7 @@ class ReadersController < ApplicationController
 			flash[:success] = 'Reader was created'
 			redirect_to root_path
 		else
-			flash[:error] = 'There occured a problem. Try again'
+			flash.now[:error] = 'There occured a problem. Try again'
 			render :new
 		end
 	end

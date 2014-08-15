@@ -19,4 +19,6 @@ ActiveRecord::Schema.define(version: 20140813100456) do
     t.datetime "updated_at"
   end
 
+  add_index "readers", ["email"], name: "index_readers_on_email", unique: true, using: :btree
+
 end

@@ -2,29 +2,36 @@ require 'rails_helper'
 
 describe 'readers/new.html.erb' do
 	
-	before :each do
-		reader = mock_model('Reader').as_new_record.as_null_object
-		assign(:reader, reader)
-		render
+	subject {page}
+	before { visit new_reader_path}
+
+	it { should have_selector('form#new_reader')}
+	it { should have_selector('#reader_email')}
+	it { should have_selector('#reader_password')}
+	it { should have_selector('#reader_password_confirmation')}
+	it { should have_selector("input[type='submit']")}
+	
+	describe 'with invalid information' do
+		it 'should not create a reader' do
+			expect { click_on 'Register'}.not_to change(Reader, :count)
+		end
 	end
 
-	it 'should have new_reader form' do		
-		expect(rendered).to have_selector('form#new_reader')
+	describe 'after submission' do
+		before { click_on 'Register'}
+
+		it {should have_content('There occured a problem. Try again')}
 	end
 
-	it 'should have email form' do		
-		expect(rendered).to have_selector('#reader_email')
-	end
+	describe 'with valid info' do
+		before do
+			fill_in 'Email', with: 's@y.com'
+			fill_in 'Password', with: 'pass'
+			fill_in 'Confirm', with: 'pass'
+		end
 
-	it 'should have reader_password field' do
-		expect(rendered).to have_selector('#reader_password')
-	end
-
-	it 'should have reader_password_confirmation field' do
-		expect(rendered).to have_selector('#reader_password_confirmation')
-	end
-
-	it 'should have register button' do
-		expect(rendered).to have_selector("input[type='submit']")
+		it 'should create a user' do
+			expect {click_on 'Register'}.to change(Reader, :count).by(1)
+		end
 	end
 end

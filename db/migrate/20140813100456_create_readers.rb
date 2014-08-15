@@ -5,5 +5,6 @@ class CreateReaders < ActiveRecord::Migration
 
     	t.timestamps
     end
+    add_index :readers, :email, unique: true
   end
 end

@@ -1,6 +1,19 @@
 <%= form_for @reader do |f| %>
+	<% if @reader.errors.any? %>
+		<ul>
+		<% @reader.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<%end%>
+		</ul>
+	<%end%>
+	<%= f.label :email %>
 	<%= f.email_field :email %>
+
+	<%= f.label :password %>
 	<%= f.password_field :password %>
+
+	<%= f.label :password_confirmation, "Confirm" %>
 	<%= f.password_field :password_confirmation %>
+	
 	<%= f.submit 'Register'%>
 <%end%>

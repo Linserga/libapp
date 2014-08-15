@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 describe ReadersController do
+	
+	let(:valid_attributes){
+		{email:'s@m.com', password: 'pass', password_confirmation: 'pass'}
+	}
+
+	let(:invalid_attributes){
+		{email:'reader', password: 'pass', password_confirmation: 'pass'}
+	}
+
 	describe 'GET new' do
 		
 		it 'assigns @reader variable to the view' do
@@ -18,11 +27,22 @@ describe ReadersController do
 
 	describe 'Post create' do
 		it 'should save new reader with valid parameters' do
-			reader = Reader.create!(email: 's@m.com', password: 'pass', password_confirmation: 'pass')
-			
-			expect(reader.reload.email).to eq('s@m.com')
-			expect(response).to have_http_status(200)
-			expect(flash).not_to be_nil
+			expect{
+				post :create, { reader: valid_attributes}
+			}.to change(Reader, :count).by(1)
+		end
+
+		it 'should assign a newly created reader to @reader' do
+			post :create, {reader: valid_attributes}
+
+			expect(assigns(:reader)).to be_a(Reader)
+			expect(assigns(:reader)).to be_persisted
+		end
+
+		it 'should render new form with error message with invalid parameters' do
+			post :create, { reader: invalid_attributes}
+
+			expect(response).to render_template(:new)
 		end		
 	end
 end
