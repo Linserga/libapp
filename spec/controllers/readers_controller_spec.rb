@@ -43,6 +43,6 @@ describe ReadersController do
 			post :create, { reader: invalid_attributes}
 
 			expect(response).to render_template(:new)
-		end		
+		end			
 	end
 end

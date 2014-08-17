@@ -8,7 +8,8 @@ class ReadersController < ApplicationController
 		@reader = Reader.new(reader_params)
 
 		if @reader.save
-			flash[:success] = 'Welcome. Reader was created'
+			flash[:success] = "Welcome, #{@reader.email}"
+			session[:current_reader_id] = @reader.id
 			redirect_to root_path
 		else
 			flash.now[:error] = 'There occured a problem. Try again'

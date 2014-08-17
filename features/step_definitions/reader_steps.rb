@@ -7,7 +7,7 @@ When(/^I fill the register form with valid data$/) do
 	fill_in 'reader_email', with: 'reader01@mail.com'
 	fill_in 'reader_password', with: 'pass'
 	fill_in 'reader_password_confirmation', with: 'pass'
-	click_on 'Register'
+	click_button 'Register'
 end
 
 Then (/^I should be registered in application$/) do
@@ -23,7 +23,7 @@ When(/^I fill the register form with invalid data$/) do
 	fill_in 'reader_email', with: 'reader'
 	fill_in 'reader_password', with: 'pass'
 	fill_in 'reader_password_confirmation', with: 'pass'
-	click_on 'Register'
+	click_button 'Register'
 end
 
 Then(/^I should see the register form again$/) do
@@ -44,4 +44,27 @@ Then(/^I should see guest menu$/) do
 	expect(page).to have_link('Register', href: register_path)
 end
 
+Given(/^I am a 'john@reader\.com' reader$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see 'john@reader\.com' reader menu$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+
+Given(/^reader with 'bob@reader\.com' exists$/) do
+	Reader.create(email: 'bob@reader.com', password: 'pass', password_confirmation: 'pass')
+end
+
+When(/^I fill the login form with valid data for 'bob@reader\.com' reader$/) do
+	visit login_path
+	fill_in 'Email', with: 'bob@reader.com'
+	fill_in 'Password', with: 'pass'
+	click_button 'Log in'
+end
+
+Then(/^I should be logged in as 'bob@reader\.com' reader$/) do
+	expect(page).to have_content("Welcome, bob@reader.com")
+end
 
