@@ -9,7 +9,7 @@ class ReadersController < ApplicationController
 
 		if @reader.save
 			flash[:success] = "Welcome, #{@reader.email}"
-			session[:current_reader_id] = @reader.id
+			login @reader
 			redirect_to root_path
 		else
 			flash.now[:error] = 'There occured a problem. Try again'

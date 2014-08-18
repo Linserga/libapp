@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813100456) do
+ActiveRecord::Schema.define(version: 20140818103924) do
+
+  create_table "books", force: true do |t|
+    t.integer  "reader_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "books", ["reader_id"], name: "index_books_on_reader_id", using: :btree
 
   create_table "readers", force: true do |t|
     t.string   "email"

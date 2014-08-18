@@ -1,4 +1,4 @@
-require 'rails_helper'
+  require 'rails_helper'
 
 describe SessionsController do
 
@@ -27,5 +27,5 @@ describe SessionsController do
 			get :destroy
 			expect(response).to redirect_to root_path
 		end
-	end	
+	end
 end

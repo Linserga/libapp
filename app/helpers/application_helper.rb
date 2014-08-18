@@ -8,6 +8,10 @@ module ApplicationHelper
   		@_current_reader ||= session[:current_reader_id] && Reader.find_by(id: session[:current_reader_id])
   	end	
 
+  	def login(reader)
+  		session[:current_reader_id] = reader.id
+  	end
+
   	def auth
 		if !logged_in?
 			flash[:error] = 'Please log in'
