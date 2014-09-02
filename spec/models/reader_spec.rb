@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Reader do
-	
+	it {should have_many(:books)}
 	before do
 		@reader = Reader.new(email: 's@y.com', password: 'pass', password_confirmation: 'pass')
 	end

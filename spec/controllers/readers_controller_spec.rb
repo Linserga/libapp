@@ -43,6 +43,12 @@ describe ReadersController do
 			post :create, { reader: invalid_attributes}
 
 			expect(response).to render_template(:new)
+		end
+
+		it 'should deliver welcome email message to a newly created reader' do
+			expect(ReaderMailer).to receive(:welcome).with('s@m.com')
+			#ReaderMailer.should_receive(:welcome).with('reader01@email.com')
+			post :create, {reader: valid_attributes}
 		end			
 	end
 end

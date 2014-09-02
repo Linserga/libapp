@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'carrierwave'
 gem 'bcrypt-ruby'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -37,4 +38,5 @@ group :test do
 	gem 'shoulda-matchers', require: false
 	gem 'capybara'
 	gem 'factory_girl_rails'
+	gem 'email_spec'
 end

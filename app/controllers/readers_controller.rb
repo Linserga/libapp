@@ -8,6 +8,7 @@ class ReadersController < ApplicationController
 		@reader = Reader.new(reader_params)
 
 		if @reader.save
+			ReaderMailer.welcome(@reader.email)
 			flash[:success] = "Welcome, #{@reader.email}"
 			login @reader
 			redirect_to root_path

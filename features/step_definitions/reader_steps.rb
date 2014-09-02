@@ -68,3 +68,7 @@ Then(/^I should be logged in as 'bob@reader\.com' reader$/) do
 	expect(page).to have_content("Welcome, bob@reader.com")
 end
 
+Then(/^I should receive welcome email$/) do
+	expect(unread_emails_for('reader01@mail.com').size).to eq(1)
+end
+

@@ -2,9 +2,12 @@ require 'rails_helper'
 
 describe BooksController do
 
+	let(:reader){FactoryGirl.create(:reader)}
 
 	before do
-		session[:current_reader_id] = 1
+		controller.class.skip_before_action :auth
+		#controller.stub(:auth).and_return(true)
+
 	end
 
 	describe 'GET new' do
